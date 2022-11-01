@@ -21,7 +21,8 @@
 ![Markdown](https://img.shields.io/badge/-Markdown-333333?style=flat&logo=markdown)
 
 ### 开源项目
-- [ds-connect](https://github.com/wwqdrh/ds-connect)
+- [ds-connect](https://github.com/wwqdrh/ds-connect): local to dockerswarm网络工具
+- [fssync](https://github.com/wwqdrh/fssync): 大文件上传下载工具
 
 ### 关于我
 - [个人博客](https://wwqdrh.github.io)
