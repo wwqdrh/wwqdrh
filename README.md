@@ -24,13 +24,14 @@
 - dapr微服务平台
   - dapr初见
     - [视频](https://www.bilibili.com/video/BV1L24y1y75B/?share_source=copy_web&vd_source=7e061b9f0ecc7c6ef4ca5ea89c5733a2)
-    - [文档](https://github.com/wwqdrh/broadcast/tree/main//use_dapr/01-start/docs.md)
+    - [文档](https://github.com/wwqdrh/broadcast/tree/main/use_dapr/01-start/docs.md)
   - 微服务功能尝试
-    - [文档](https://github.com/wwqdrh/broadcast/tree/main//use_dapr/02-basic/docs.md)
+    - [文档](https://github.com/wwqdrh/broadcast/tree/main/use_dapr/02-basic/docs.md)
   - docker平台下做灰度部署
     - [视频](https://www.bilibili.com/video/BV1c84y1k79a/)
-    - [文档](https://github.com/wwqdrh/broadcast/tree/main//user_dapr/03-gray/docs.md)
-
+    - [文档](https://github.com/wwqdrh/broadcast/tree/main/user_dapr/03-gray/docs.md)
+  - 一个多服务系统示例
+    - [文档](https://github.com/wwqdrh/broadcast/tree/main/user_dapr/04-doaapp/README.md)
 <br />
 
 <br />
