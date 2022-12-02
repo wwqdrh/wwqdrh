@@ -12,3 +12,12 @@
   </samp>
 </p>
 
+<br />
+
+<br />
+
+## contact me
+
+<p align="center">
+  <img width="128" src="./know-chat.jpg" />
+</p>
