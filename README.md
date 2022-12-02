@@ -29,7 +29,7 @@
     - [文档](https://github.com/wwqdrh/broadcast/blob/main/use_dapr/02-basic/docs.md)
   - docker平台下做灰度部署
     - [视频](https://www.bilibili.com/video/BV1c84y1k79a/)
-    - [文档](https://github.com/wwqdrh/broadcast/blob/main/user_dapr/03-gray/docs.md)
+    - [文档](https://github.com/wwqdrh/broadcast/blob/main/use_dapr/03-gray/docs.md)
   - 一个多服务系统示例
     - [文档](https://github.com/wwqdrh/broadcast/blob/main/use_dapr/04-doaapp/README.md)
 <br />
