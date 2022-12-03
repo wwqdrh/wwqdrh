@@ -32,11 +32,16 @@
     - [文档](https://github.com/wwqdrh/broadcast/blob/main/use_dapr/03-gray/docs.md)
   - 一个多服务系统示例
     - [文档](https://github.com/wwqdrh/broadcast/blob/main/use_dapr/04-doaapp/README.md)
+  - wasi与普通模式下的性能对比
+    - [视频](https://www.bilibili.com/video/BV1Ve4y137tW/)
+    - [文档](https://github.com/wwqdrh/broadcast/blob/main/use_dapr/05-trywasm/README.md)
 <br />
 
 <br />
 
 ## Contact me
+
+> 如果你有任何问题要问我
 
 <p align="center">
   <img width="128" src="./know-chat.jpg" />
