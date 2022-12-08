@@ -21,7 +21,7 @@
 - 开发手册
   - 如何做接口测试
     - [视频](https://www.bilibili.com/video/BV1fY411R7Dq)
-    - [文档](./handle/how-api-test/README.md)
+    - [文档](./handle/how_api_test/README.md)
   - 日志系统搭建
     - [视频]
     - [文档](./handle/build_logcenter/README.md)

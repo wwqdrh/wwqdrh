@@ -1,0 +1,102 @@
+version: "3.9"
+
+networks:
+  test_logcenter:
+    external: true
+
+volumes:
+  test_logcenter_app1:
+    external: true
+  
+  test_logcenter_app2:
+    external: true
+  
+  test_logcenter_loki_store:
+    external: true
+
+  test_logcenter_promtail_store:
+    external: true
+  
+  test_logcenter_grafana_store:
+    external: true
+
+configs:
+  test_logcenter_loki:
+    external: true
+  
+  test_logcenter_promtail:
+    external: true
+
+services:
+  app1:
+    image: python:3.10
+    volumes:
+      - ./volume-write.py:/app/volume-write.py
+      - type: volume
+        source: test_logcenter_app1
+        target: /var/log
+    networks:
+      - test_logcenter
+    environment:
+      - LOG=/var/log/base.log
+      - APP=app1
+    command: python /app/volume-write.py
+  
+  app2:
+    image: python:3.10
+    volumes:
+      - ./volume-write.py:/app/volume-write.py
+      - type: volume
+        source: test_logcenter_app2
+        target: /var/log
+    networks:
+      - test_logcenter
+    environment:
+      - LOG=/var/log/base.log
+      - APP=app2
+    command: python /app/volume-write.py
+  
+  promtail:
+    image: grafana/promtail:2.6.0
+    networks:
+      - test_logcenter
+    configs:
+      - source: test_logcenter_promtail
+        target: /mnt/config/promtail-config.yaml
+    volumes:
+      - type: volume
+        source: test_logcenter_promtail_store
+        target: /data/promtail
+      - type: volume
+        source: test_logcenter_app1
+        target: /var/log/app1
+      - type: volume
+        source: test_logcenter_app2
+        target: /var/log/app2
+    command: -config.file=/mnt/config/promtail-config.yaml
+  
+  loki:
+    image: grafana/loki:2.6.0
+    user: root
+    networks:
+      - test_logcenter
+    configs:
+      - source: test_logcenter_loki
+        target: /mnt/config/loki-config.yaml
+    volumes:
+      - test_logcenter_loki_store:/tmp/data
+        
+    command: -config.file=/mnt/config/loki-config.yaml
+    
+  grafana:
+    image: grafana/grafana-oss:8.5.6
+    networks:
+      - test_logcenter
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - type: volume
+        source: test_logcenter_grafana_store
+        target: /var/lib/grafana
+    ports:
+      - "3000:3000"
