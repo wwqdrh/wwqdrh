@@ -1,0 +1,21 @@
+{
+  "name": "react-docker-app",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "start": "node server.js",
+    "buildclient": "cd client && pnpm install && pnpm run build"
+  },
+  "dependencies": {
+    "axios": "^1.2.0",
+    "body-parser": "^1.20.1",
+    "express": "^4.16.4",
+    "isomorphic-fetch": "^3.0.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1"
+  }
+}

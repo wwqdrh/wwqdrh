@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  # dapr-placement:
+  #   image: "daprio/dapr"
+  #   command: ["./placement", "-port", "50006"]
+
+  ingress: 
+    image: grayapp_gateway:latest
+    deploy:
+      replicas: 1
+    ports:
+      - 9000:9000
+
+  app1:
+    image: grayapp:v1
+    deploy:
+      replicas: 1
+  
+  # app1-dapr:
+  #   image: "daprio/daprd:edge"
+  #   deploy:
+  #     replicas: 1
+  #   command: ["./daprd",
+  #     "-app-id", "grayapp",
+  #     "-app-port", "8080",
+  #     "-dapr-http-port", "8080",
+  #     "-placement-host-address", "dapr-placement:50006"]
+  
+  app2:
+    image: grayapp:v2
+    deploy:
+      replicas: 1
+  
+  devtool:
+    image: centos
+    deploy:
+      replicas: 1
+    command: "sleep 3600"
+  
+  # app2-dapr:
+  #   image: "daprio/daprd:edge"
+  #   deploy:
+  #     replicas: 1
+  #   command: ["./daprd",
+  #     "-app-id", "grayapp",
+  #     "-app-port", "8080",
+  #     "-dapr-http-port", "8080",
+  #     "-placement-host-address", "dapr-placement:50006"]

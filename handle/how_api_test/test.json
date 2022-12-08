@@ -1,0 +1,51 @@
+[
+    {
+        "name": "用户注册",
+        "url": "http://127.0.0.1:8081/user/register",
+        "method": "POST",
+        "data": {
+            "name": "wwqdrh",
+            "password": "123456"
+        },
+        "content-type": "application/json",
+        "expect": [
+            "@contain($res.$body.$str, \"注册成功\")"
+        ]
+    },
+    {
+        "name": "用户登录",
+        "url": "http://127.0.0.1:8081/user/login",
+        "method": "POST",
+        "data": {
+            "name": "wwqdrh",
+            "password": "123456"
+        },
+        "content-type": "application/json",
+        "expect": [
+            "@contain($res.$body.$str, \"登录成功\")"
+        ],
+        "event": [
+            "$env.token = $res.$body.$json.access_token"
+        ]
+    },
+    {
+        "name": "用户信息",
+        "url": "http://127.0.0.1:8081/user/info",
+        "method": "POST",
+        "header": [
+            "x-token: {{ token }}"
+        ],
+        "expect": [
+            "@contain($res.$body.$str, \"查询成功\")"
+        ]
+    }
+    ,
+    {
+        "name": "用户信息",
+        "url": "http://127.0.0.1:8081/user/info",
+        "method": "POST",
+        "expect": [
+            "@contain($res.$body.$str, \"查询成功\")"
+        ]
+    }
+]
