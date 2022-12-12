@@ -1,0 +1,5 @@
+p, alice, /api/1, get
+p, bob, /api/1, get
+p, alice, /api/2, get
+p, admin, /api/1, read
+g, alice, admin

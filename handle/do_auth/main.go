@@ -2,10 +2,68 @@ package doauth
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/casbin/casbin/v2"
 	"github.com/wwqdrh/gokit/logger"
 )
+
+// 自定义函数
+
+func KeyMatch(key1 string, key2 string) bool {
+	i := strings.Index(key2, "*")
+	if i == -1 {
+		return key1 == key2
+	}
+
+	if len(key1) > i {
+		return key1[:i] == key2[:i]
+	}
+	return key1 == key2[:i]
+}
+
+func KeyMatchFunc(args ...interface{}) (interface{}, error) {
+	name1 := args[0].(string)
+	name2 := args[1].(string)
+
+	return (bool)(KeyMatch(name1, name2)), nil
+}
+
+var defaultReqCount = reqCount{}
+
+type reqCount map[string]int
+
+func (c reqCount) Add(url string) {
+	c[url] += 1
+}
+
+func (c reqCount) Time(url string) int {
+	return c[url]
+}
+
+func TimesMatch(reqUser, reqAPI, reqMethod string, policyUser, policyAPI, policyMethod string) bool {
+	if defaultReqCount.Time(reqUser+reqAPI) >= 5 {
+		return false
+	}
+
+	if reqUser != policyUser || reqAPI != policyAPI || reqMethod != policyMethod {
+		return false
+	}
+
+	defaultReqCount.Add(reqUser + reqAPI)
+	return true
+}
+
+func TimesMatchFunc(args ...interface{}) (interface{}, error) {
+	reqUser := args[0].(string)
+	reqAPI := args[1].(string)
+	reqMethod := args[2].(string)
+	policyUser := args[3].(string)
+	policyAPI := args[4].(string)
+	policyMethod := args[5].(string)
+
+	return (bool)(TimesMatch(reqUser, reqAPI, reqMethod, policyUser, policyAPI, policyMethod)), nil
+}
 
 type aclReq struct {
 	sub string
@@ -20,6 +78,8 @@ func doACL(reqs []aclReq) []bool {
 	if err != nil {
 		logger.DefaultLogger.Error(err.Error())
 	}
+	// AddFunction 注册函数
+	e.AddFunction("my_func", KeyMatchFunc)
 	for i, item := range reqs {
 		ok, err := e.Enforce(item.sub, item.obj, item.act)
 		if err != nil {
@@ -44,6 +104,7 @@ func doRBAC(reqs []reqRBAC) []bool {
 	if err != nil {
 		logger.DefaultLogger.Error(err.Error())
 	}
+	e.AddFunction("my_func", KeyMatchFunc)
 	for i, item := range reqs {
 		ok, err := e.Enforce(item.sub, item.obj, item.act)
 		if err != nil {
@@ -55,34 +116,27 @@ func doRBAC(reqs []reqRBAC) []bool {
 	return res
 }
 
-func simple() {
-	e, err := casbin.NewEnforcer("path/to/model.conf", "path/to/policy.csv")
+type reqTimes struct {
+	user   string
+	method string
+	api    string
+}
+
+func doTimes(reqs []reqTimes) []bool {
+	res := make([]bool, len(reqs))
+
+	e, err := casbin.NewEnforcer("./times/model.conf", "./times/policy.csv")
 	if err != nil {
 		logger.DefaultLogger.Error(err.Error())
 	}
-
-	sub := "alice" // 想要访问资源的用户。
-	obj := "data1" // 将被访问的资源。
-	act := "read"  // 用户对资源执行的操作。
-
-	ok, err := e.Enforce(sub, obj, act)
-
-	if err != nil {
-		// 处理err
+	e.AddFunction("times", TimesMatchFunc)
+	for i, item := range reqs {
+		ok, err := e.Enforce(item.user, item.api, item.method)
+		if err != nil {
+			logger.DefaultLogger.Error(err.Error())
+		}
+		fmt.Printf("%v: %v\n", item, ok)
+		res[i] = ok
 	}
-
-	if ok == true {
-		// 允许alice读取data1
-	} else {
-		// 拒绝请求，抛出异常
-	}
-
-	// 您可以使用BatchEnforce()来批量执行一些请求
-	// 这个方法返回布尔切片，此切片的索引对应于二维数组的行索引。
-	// 例如results[0] 是{"alice", "data1", "read"}的结果
-	results, err := e.BatchEnforce([][]interface{}{{"alice", "data1", "read"}, {"bob", "datata2", "write"}, {"jack", "data3", "read"}})
-	if err != nil {
-		logger.DefaultLogger.Error(err.Error())
-	}
-	fmt.Println(results)
+	return res
 }

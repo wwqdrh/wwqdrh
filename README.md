@@ -23,8 +23,9 @@
     - [视频](https://www.bilibili.com/video/BV1fY411R7Dq)
     - [文档](./handle/how_api_test/README.md)
   - 日志系统搭建
-    - [视频]
     - [文档](./handle/build_logcenter/README.md)
+  - 权限控制实践
+    - [文档](./handle/do_auth/README.md)
 - dapr微服务平台
   - dapr初见
     - [视频](https://www.bilibili.com/video/BV1L24y1y75B)

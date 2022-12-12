@@ -31,3 +31,17 @@ func TestDoRBAC(t *testing.T) {
 		t.Error("与预期不符, 请检查")
 	}
 }
+
+func TestDoTimes(t *testing.T) {
+	reqs := []reqTimes{
+		{user: "alice", api: "/api/1", method: "get"},
+		{user: "alice", api: "/api/1", method: "get"},
+		{user: "alice", api: "/api/1", method: "get"},
+		{user: "alice", api: "/api/1", method: "get"},
+		{user: "alice", api: "/api/1", method: "get"},
+		{user: "alice", api: "/api/1", method: "get"},
+	}
+	if !reflect.DeepEqual([]bool{true, true, true, true, true, false}, doTimes(reqs)) {
+		t.Error("与预期不符, 请检查")
+	}
+}
