@@ -10,14 +10,16 @@ class Engine(BaseHTTPRequestHandler):
         if self.path == "/api1":
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("user", "100")
             self.end_headers()
-            self.wfile.write(json.dumps({"statut": 0, "path": self.path}).encode("utf8"))
+            self.wfile.write(json.dumps({"statut": 0, "user": 100, "path": self.path}).encode("utf8"))
+            self.wfile.close()
         else:
             self.send_response(500)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
             self.wfile.write(json.dumps({"statut": 1, "path": self.path}).encode("utf8"))
-
+            self.wfile.close()
 
 if __name__ == "__main__":
     server = HTTPServer(HOST, Engine)
