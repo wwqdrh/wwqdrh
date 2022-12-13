@@ -94,3 +94,9 @@ g, /book/:id, book_group
 > 我一般使用gorm adapter
 
 
+# 微服务中
+
+这里有三个服务，用于测试微服务中的权限验证
+
+使用openresty作为作为网关，首先向auth组件进行验证，验证通过之后再转向basic服务
+

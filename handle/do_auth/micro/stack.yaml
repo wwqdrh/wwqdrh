@@ -1,0 +1,32 @@
+version: "3.9"
+
+networks:
+  auth:
+
+services:
+  basic_ingress:
+    image: openresty/openresty
+    volumes:
+      - ./basic_ingress.conf:/etc/nginx/conf.d/basic_ingress.conf
+      - ./lib:/usr/local/openresty/nginx/conf/lua_modules/
+    networks:
+      - auth
+    ports:
+      - 8000:8000
+
+  auth:
+    image: python:3.10
+    volumes:
+      - ./auth.py:/app/auth.py
+    networks:
+      - auth
+    command: python /app/auth.py
+  
+  basic:
+    image: python:3.10
+    volumes:
+      - ./basic.py:/app/basic.py
+    networks:
+      - auth
+    command: python /app/basic.py
+  
