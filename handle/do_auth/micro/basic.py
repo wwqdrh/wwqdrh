@@ -7,6 +7,7 @@ HOST = ("0.0.0.0", 8000)
 class Engine(BaseHTTPRequestHandler):
     def do_GET(self):
         # do some mock auth
+        print(self.path)
         if self.path == "/api1":
             self.api1()
         elif self.path == "/api2":
@@ -18,7 +19,7 @@ class Engine(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.end_headers()
-        self.wfile.write(json.dumps({"path": "/api1", "user": self.headers["user"]}).encode("utf8"))
+        self.wfile.write(json.dumps({"path": "/api1", "user": self.headers["user"], "origin_path": self.headers["origin_path"]}).encode("utf8"))
     
     def api2(self):
         self.send_response(200)

@@ -12,4 +12,6 @@ docker service logs test_basic
 docker service logs test_basic_ingress
 
 docker service update --force test_basic_ingress
+
+docker service rm test_auth test_basic test_basic_ingress
 ```
