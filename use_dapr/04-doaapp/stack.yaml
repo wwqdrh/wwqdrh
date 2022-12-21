@@ -1,0 +1,22 @@
+services:
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - "50006:50006"
+  
+  service_dapr:
+    image: daprio/daprd:edge
+    command: >-
+      ./daprd
+      -app-id minute-hand
+      -app-port 3000
+      -app-protocol grpc
+      -dapr-http-port 3500
+      -placement-host-address placement:50000
+      -components-path /components
+    volumes:
+      - ./components/:/components
+  
+  servicea:
+    

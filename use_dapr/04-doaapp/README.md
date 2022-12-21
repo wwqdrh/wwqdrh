@@ -64,3 +64,7 @@ curl -w "\n" -s 'http://localhost:3500/multiply' -H 'Content-Type: application/j
 ```
 
 打开浏览器进行测试
+
+# 使用docker环境
+
+> 具体查看当前目录下德stack.yaml声明文件
