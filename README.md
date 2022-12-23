@@ -2,7 +2,10 @@
 
 <p align="center">
   <samp>
-    <a href="https://wwqdrh.github.io">blog</a>
+    <a href="https://wwqdrh.github.io/blog">blog</a>
+  </samp>
+  <samp>
+    <a href="https://wwqdrh.github.io/apps">apps</a>
   </samp>
   <samp>
     <a href="https://space.bilibili.com/538676331">video</a>
