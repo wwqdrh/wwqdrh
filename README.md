@@ -2,16 +2,16 @@
 
 <p align="center">
   <samp>
-    <a href="https://wwqdrh.github.io/blog">blog</a>
+    <a href="https://wwqdrh.github.io/blog" target="_blank">blog</a>
   </samp>
   <samp>
-    <a href="https://wwqdrh.github.io/apps">apps</a>
+    <a href="https://wwqdrh.github.io/apps" target="_blank">apps</a>
   </samp>
   <samp>
-    <a href="https://space.bilibili.com/538676331">video</a>
+    <a href="https://space.bilibili.com/538676331" target="_blank">video</a>
   </samp>
   <samp>
-    <a href="https://114.132.221.80/">maas</a>
+    <a href="https://114.132.221.80/" target="_blank">maas</a>
   </samp>
 </p>
 
