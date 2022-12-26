@@ -13,9 +13,6 @@
   <samp>
     <a href="https://space.bilibili.com/538676331" target="_blank">video</a>
   </samp>
-  <samp>
-    <a href="https://114.132.221.80/" target="_blank">maas</a>
-  </samp>
 </p>
 
 <br />
