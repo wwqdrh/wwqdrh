@@ -60,13 +60,3 @@
 </details>
   
 <br />
-
-<br />
-
-## Contact me
-
-> 如果你有任何问题要问我
-
-<p align="center">
-  <img width="128" src="./know-chat.jpg" />
-</p>
