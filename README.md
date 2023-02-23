@@ -35,6 +35,8 @@
   - [文档](./handle/build_logcenter/README.md)
 - 权限控制实践: 描述了casbin如何做权限测试，以及一个在微服务架构中，将鉴权部分移动到openresty网关中，鉴权成功才会将流量流向下游服务器
   - [文档](./handle/do_auth/README.md)
+- 数据库migrate实践
+  - [文档](./handle/dbmigrate/README.md)
 </details>
 
 <details>
