@@ -2,6 +2,9 @@
 
 <p align="center">
   <samp>
+    <a href="https://wwqdrh.github.io/cookbook" target="_blank">cookbook</a>
+  </samp>
+  <samp>
     <a href="https://wwqdrh.github.io/blog" target="_blank">blog</a>
   </samp>
   <samp>
